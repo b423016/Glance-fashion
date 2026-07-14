@@ -4,18 +4,18 @@
 
 ## 1. The problem, and why a vanilla CLIP baseline is not enough
 
-I want text-to-image retrieval over a fashion gallery that resolves **garment x
-colour x environment x vibe**, handles **compositional** queries, and works
-**zero-shot** (no query-to-image training labels).
+The objective is text-to-image retrieval over a fashion gallery that resolves
+**garment x colour x environment x vibe**, handles **compositional** queries,
+and works **zero-shot** (no query-to-image training labels).
 
 A single pooled CLIP/SigLIP embedding behaves like a **bag of words across
 modalities**: it aligns the *set* of concepts in a caption with the *set* in an
 image but binds attributes to objects poorly. So *"a red tie and a white shirt"*
 lands almost on top of *"a white tie and a red shirt"* - even a fashion-tuned
-SigLIP scores ~4.5/100 on controlled colour-binding. I confirmed it on my own
+SigLIP scores ~4.5/100 on controlled colour-binding. I confirmed this on my own
 gallery: with a global embedding, the query *"red tie + white shirt"* actually
 retrieves **more** of the *swapped* "white tie + red shirt" images than correct
-ones (negative discrimination - see section 4).
+ones (negative discrimination - see Section 4).
 
 **Design principle:** keep a strong fashion encoder for cheap *recall*, but add a
 **training-free compositional re-ranker** that makes attribute-to-object binding
@@ -80,14 +80,14 @@ degrade gracefully). `mode="global"` disables Stage 2 for the ablation baseline.
 
 ## 4. Results - does it beat vanilla CLIP?
 
-Fashionpedia has no query-to-image relevance labels, so I synthesise a relevance
+Fashionpedia has no query-to-image relevance labels, so I synthesised a relevance
 judge **from the annotations** (GT garment category + the extracted colour), used
 only for *evaluation*, never for retrieval, and identical for both modes. *(Caveat:
 the judge shares its colour reading with the retriever's gate, so it measures
-consistency-with-extraction; the visual boards + the hard-negative test are the
-independent checks.)* `glance-eval` produces the table + boards.
+consistency-with-extraction; the visual boards and the hard-negative test serve as
+the independent checks.)* `glance-eval` produces the table and boards.
 
-**global (vanilla fashion-CLIP) vs full (my pipeline), 4,113-image gallery:**
+**Global (vanilla fashion-CLIP) vs full (my pipeline), 4,113-image gallery:**
 
 | Query | positives | P@8 g to f | nDCG@10 g to f | AP@20 g to f |
 |-------|:---:|:---:|:---:|:---:|
@@ -105,8 +105,9 @@ positives are abundant (S5, 778 of 4,113) both modes already fill the top-8, so
 full is flat - expected, not a regression.
 
 **The binding proof (`glance-eval-hardneg`).** Precision alone can be satisfied by
-colour filtering; to prove I *bind* attributes I run colour-swap pairs and report
-the discrimination gap = P@8(query on its OWN spec) - P@8(query on the SWAPPED spec):
+colour filtering; to prove that I actually *bind* attributes, I run colour-swap
+pairs and report the discrimination gap = P@8(query on its OWN spec) - P@8(query
+on the SWAPPED spec):
 
 | Swap pair | global | **full** |
 |-----------|:---:|:---:|
@@ -117,18 +118,18 @@ the discrimination gap = P@8(query on its OWN spec) - P@8(query on the SWAPPED s
 On the marquee query the **global baseline is negative** - it cannot tell the swap
 apart and actually prefers the wrong binding - while **full flips positive**. The
 boards make it visible: for *"white top + black pants"* the global baseline mixes
-in wrong-colour tops and black shorts while full returns clean white-top/black-pants
-(P@8 0.75 to 1.00), and the *"red tie + white shirt"* board now surfaces genuine
-suited red-tie/white-shirt looks. The hard-negative queries deliberately strip the
-scene/formality cue to isolate **pure colour-garment binding** - which is why Q5's
-binding-only own-P@8 here (0.25) is below its full-query 0.62 in section 4's table, which
-also benefits from the *"formal"* filter.
+in wrong-colour tops and black shorts, while full returns clean white-top/black-pants
+results (P@8 0.75 to 1.00), and the *"red tie + white shirt"* board now surfaces
+genuine suited red-tie/white-shirt looks. The hard-negative queries deliberately
+strip the scene/formality cue to isolate **pure colour-garment binding** - which
+is why Q5's binding-only own-P@8 here (0.25) is below its full-query 0.62 in
+Section 4's table, which also benefits from the *"formal"* filter.
 
 ## 5. Honest limitations
 
 - **Binding margin is modest on abundant-positive queries.** When a colour+garment
   combination is common (S5: 778 positives), a global embedding already fills the
-  top-8, so binding adds little there; the win concentrates on rarer/compositional
+  top-8, so binding adds little there; the gain concentrates on rarer/compositional
   queries. This is inherent to precision@k on a common attribute, not a bug.
 - **Garment identity from region embeddings is soft** at SigLIP's compressed
   similarity scale, so the colour gate carries much of the binding signal; a
@@ -143,8 +144,8 @@ also benefits from the *"formal"* filter.
 - **To 1M images:** recall is sublinear ANN over **one vector per image**
   (LanceDB HNSW/IVF, on-disk/S3); the expensive binding runs **only on the top-N
   recalled candidates**, so cost scales with `N`, not the gallery. The single
-  change is swapping GT masks for an open-vocab detector (Grounding DINO /
-  YOLO-World) in `_embed_regions`; every downstream step is unchanged.
+  change needed is swapping GT masks for an open-vocab detector (Grounding DINO /
+  YOLO-World) in `_embed_regions`; every downstream step remains unchanged.
 - **Zero-shot:** every scored signal is an embedding (garment text vs region) or a
   pixel measurement (colour) - no per-label training, no fine-tuning. Unrecognised
   garment/colour words fall back gracefully. Nothing is keyword-matched against

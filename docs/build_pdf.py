@@ -50,13 +50,14 @@ def build():
     design = (DOCS / "design.md").read_text()
     approaches = (DOCS / "approaches.md").read_text()
 
-    board_md = "\n\n### Result boards - global (baseline) vs full (my pipeline)\n\n" + "\n\n".join(
+    board_md = "\n\n### Result boards - global (baseline) vs full (pipeline)\n\n" + "\n\n".join(
         f"*{cap}*\n\n![]({ROOT / 'outputs' / fn})" for cap, fn in BOARDS)
     design = design.replace("## 5. Honest limitations", board_md + "\n\n## 5. Honest limitations", 1)
 
     full_md = ("# Multimodal Fashion & Context Retrieval - Write-up\n\n"
                "*Glance ML assignment - compositional text-to-image fashion retrieval that beats "
-               "vanilla CLIP - GitHub: https://github.com/b423016/Glance-fashion*\n\n"
+               "vanilla CLIP*\n\n"
+               "**GitHub:** [https://github.com/b423016/Glance-fashion](https://github.com/b423016/Glance-fashion)\n\n"
                + design + "\n\n---\n\n" + approaches)
 
     html_body = markdown.markdown(full_md, extensions=["tables", "fenced_code"])
