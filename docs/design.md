@@ -155,7 +155,7 @@ also benefits from the *"formal"* filter.
 
 ## 7. Codebase
 
-**GitHub:** `<add-repo-url-here>` — kept local during development per request; the
+**GitHub:** `https://github.com/b423016/Glance-fashion` — kept local during development per request; the
 project is **push-ready** (one `git init && git remote add … && git push` publishes
 it). Local path: `~/glance-fashion-retrieval/`.
 Installable package (`pip install -e .`) with console scripts
