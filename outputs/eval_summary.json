@@ -1,0 +1,132 @@
+[
+  {
+    "query": "Q1_yellow_raincoat",
+    "text": "A person in a bright yellow raincoat.",
+    "support": 11,
+    "global": {
+      "p8": 0.375,
+      "ndcg10": 0.475,
+      "ap20": 0.26
+    },
+    "full": {
+      "p8": 0.625,
+      "ndcg10": 0.684,
+      "ap20": 0.542
+    }
+  },
+  {
+    "query": "Q2_office_business",
+    "text": "Professional business attire inside a modern office.",
+    "support": null
+  },
+  {
+    "query": "Q3_blue_shirt_park",
+    "text": "Someone wearing a blue shirt sitting on a park bench.",
+    "support": 245,
+    "global": {
+      "p8": 0.5,
+      "ndcg10": 0.514,
+      "ap20": 0.186
+    },
+    "full": {
+      "p8": 0.625,
+      "ndcg10": 0.467,
+      "ap20": 0.277
+    }
+  },
+  {
+    "query": "Q4_casual_city_walk",
+    "text": "Casual weekend outfit for a city walk.",
+    "support": null
+  },
+  {
+    "query": "Q5_red_tie_white_shirt",
+    "text": "A red tie and a white shirt in a formal setting.",
+    "support": 51,
+    "global": {
+      "p8": 0.25,
+      "ndcg10": 0.315,
+      "ap20": 0.128
+    },
+    "full": {
+      "p8": 0.625,
+      "ndcg10": 0.546,
+      "ap20": 0.355
+    }
+  },
+  {
+    "query": "S1_yellow_jacket",
+    "text": "a yellow jacket",
+    "support": 11,
+    "global": {
+      "p8": 0.875,
+      "ndcg10": 0.867,
+      "ap20": 0.717
+    },
+    "full": {
+      "p8": 0.875,
+      "ndcg10": 0.863,
+      "ap20": 0.757
+    }
+  },
+  {
+    "query": "S2_blue_top",
+    "text": "a blue top",
+    "support": 245,
+    "global": {
+      "p8": 0.75,
+      "ndcg10": 0.718,
+      "ap20": 0.444
+    },
+    "full": {
+      "p8": 1.0,
+      "ndcg10": 0.934,
+      "ap20": 0.595
+    }
+  },
+  {
+    "query": "S3_red_dress",
+    "text": "a red dress",
+    "support": 122,
+    "global": {
+      "p8": 1.0,
+      "ndcg10": 0.934,
+      "ap20": 0.912
+    },
+    "full": {
+      "p8": 1.0,
+      "ndcg10": 1.0,
+      "ap20": 1.0
+    }
+  },
+  {
+    "query": "S4_white_top_black_pants",
+    "text": "a white top and black pants",
+    "support": 894,
+    "global": {
+      "p8": 0.75,
+      "ndcg10": 0.852,
+      "ap20": 0.561
+    },
+    "full": {
+      "p8": 1.0,
+      "ndcg10": 0.934,
+      "ap20": 0.759
+    }
+  },
+  {
+    "query": "S5_black_jacket_white_top",
+    "text": "a black jacket and a white top",
+    "support": 778,
+    "global": {
+      "p8": 0.5,
+      "ndcg10": 0.402,
+      "ap20": 0.157
+    },
+    "full": {
+      "p8": 0.5,
+      "ndcg10": 0.403,
+      "ap20": 0.262
+    }
+  }
+]

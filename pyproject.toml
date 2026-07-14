@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glance-fashion-retrieval"
+version = "0.1.0"
+description = "Compositional multimodal fashion text-to-image retrieval (beats vanilla CLIP, zero-shot, local)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.3",
+    "torchvision",
+    "open_clip_torch>=2.24",
+    "transformers",          # SigLIP HF tokenizer for open_clip
+    "timm",
+    "pillow",
+    "numpy",
+    "scikit-learn",          # k-means dominant-colour extraction
+    "scikit-image",          # CIELab + CIEDE2000 colour distance
+    "scipy",                 # mask erosion + Hungarian assignment
+    "lancedb",               # embedded vector store
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff"]
+docs = ["markdown"]          # PDF write-up build
+
+[project.scripts]
+glance-index = "indexer.build_index:cli"
+glance-query = "retriever.query:main"
+glance-eval = "evaluation.run_eval:main"
+glance-eval-hardneg = "evaluation.hard_negatives:main"
+
+[tool.setuptools]
+packages = ["fashionlib", "indexer", "retriever", "evaluation"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]   # pyflakes + pycodestyle + import sorting

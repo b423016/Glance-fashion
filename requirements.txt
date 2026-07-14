@@ -1,0 +1,18 @@
+# Core ML
+torch>=2.3
+torchvision
+open_clip_torch>=2.24
+transformers            # required by open_clip for the SigLIP HF tokenizer
+timm
+
+# Vision / colour
+pillow
+numpy
+scikit-learn            # k-means dominant-colour extraction
+scikit-image            # CIELab conversion + CIEDE2000 colour distance
+scipy                   # mask erosion + Hungarian assignment (linear_sum_assignment)
+
+# Vector store
+lancedb                 # embedded vector DB (ANN recall + metadata filter)
+
+tqdm

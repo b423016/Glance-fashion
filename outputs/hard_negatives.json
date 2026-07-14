@@ -1,0 +1,44 @@
+[
+  {
+    "pair": "black_jacket_white_top",
+    "mode": "global",
+    "own": 0.5,
+    "swap": 0.188,
+    "discrimination": 0.312
+  },
+  {
+    "pair": "black_jacket_white_top",
+    "mode": "full",
+    "own": 0.5,
+    "swap": 0.188,
+    "discrimination": 0.312
+  },
+  {
+    "pair": "white_top_black_pants",
+    "mode": "global",
+    "own": 0.438,
+    "swap": 0.0,
+    "discrimination": 0.438
+  },
+  {
+    "pair": "white_top_black_pants",
+    "mode": "full",
+    "own": 0.562,
+    "swap": 0.0,
+    "discrimination": 0.562
+  },
+  {
+    "pair": "red_tie_white_shirt",
+    "mode": "global",
+    "own": 0.062,
+    "swap": 0.125,
+    "discrimination": -0.062
+  },
+  {
+    "pair": "red_tie_white_shirt",
+    "mode": "full",
+    "own": 0.25,
+    "swap": 0.188,
+    "discrimination": 0.062
+  }
+]
