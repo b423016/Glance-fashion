@@ -16,13 +16,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
 BOARDS = [
-    ('"white top + black pants" — GLOBAL baseline (mixes in wrong-colour tops and black shorts)',
+    ('"white top + black pants" - GLOBAL baseline (mixes in wrong-colour tops and black shorts)',
      "S4_white_top_black_pants__global.png"),
-    ('"white top + black pants" — FULL pipeline (clean; P@8 0.75 → 1.00)',
+    ('"white top + black pants" - FULL pipeline (clean; P@8 0.75 to 1.00)',
      "S4_white_top_black_pants__full.png"),
-    ('"red tie + white shirt" — FULL (the marquee compositional query; supplement gives it real positives)',
+    ('"red tie + white shirt" - FULL (the marquee compositional query; supplement gives it real positives)',
      "Q5_red_tie_white_shirt__full.png"),
-    ('"business attire in an office" — FULL (scene-driven)',
+    ('"business attire in an office" - FULL (scene-driven)',
      "Q2_office_business__full.png"),
 ]
 
@@ -50,13 +50,13 @@ def build():
     design = (DOCS / "design.md").read_text()
     approaches = (DOCS / "approaches.md").read_text()
 
-    board_md = "\n\n### Result boards — global (baseline) vs full (our pipeline)\n\n" + "\n\n".join(
+    board_md = "\n\n### Result boards - global (baseline) vs full (my pipeline)\n\n" + "\n\n".join(
         f"*{cap}*\n\n![]({ROOT / 'outputs' / fn})" for cap, fn in BOARDS)
     design = design.replace("## 5. Honest limitations", board_md + "\n\n## 5. Honest limitations", 1)
 
-    full_md = ("# Multimodal Fashion & Context Retrieval — Write-up\n\n"
-               "*Glance ML assignment · compositional text→image fashion retrieval that beats "
-               "vanilla CLIP · code: `~/glance-fashion-retrieval/`*\n\n"
+    full_md = ("# Multimodal Fashion & Context Retrieval - Write-up\n\n"
+               "*Glance ML assignment - compositional text-to-image fashion retrieval that beats "
+               "vanilla CLIP - GitHub: https://github.com/b423016/Glance-fashion*\n\n"
                + design + "\n\n---\n\n" + approaches)
 
     html_body = markdown.markdown(full_md, extensions=["tables", "fenced_code"])
