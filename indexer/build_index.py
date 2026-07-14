@@ -8,7 +8,7 @@ Run:  python -m indexer.build_index               # full val gallery (~1,158)
       python -m indexer.build_index --limit 60    # quick smoke build
 
 At 1M scale the ONLY change is swapping the Fashionpedia GT masks for an
-open-vocab detector (Grounding DINO / YOLO-World) in ``iter_garments`` — every
+open-vocab detector (Grounding DINO / YOLO-World) in ``_embed_regions`` — every
 downstream step is identical.
 """
 from __future__ import annotations
